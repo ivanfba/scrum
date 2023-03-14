@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+   <head>
+  <title>Scrum Voting</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0">
+        <meta http-equiv="expires" content="0">
+
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="scrum.css">
+        
+   </head>
+   <body>      
+         
+        <div id="contador"></div>
+        <br>
+      
+        <div id="popup">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name"><br>
+                <div class="input-container">
+                    <button onclick="guardarNombre()">Save</button>
+                </div>
+        </div>      
+
+      <div id="scrum" style="display:none">
+         <h1>Scrum vote</h1>
+         <p>for PBI</p>
+
+            <form id="user-form" action="save_user.php" method="POST" >
+                <input hidden type="text" id="estimation" name="estimation"><br><br>
+                <input  type="text" id="visualize" name="visualize"><br><br>
+                <section id="tarjetas"></section>
+                
+                <div class="input-container">
+                    <button type="submit" id="add-btn" >Send Vote</button>
+                </div>
+                
+            </form>
+
+            <hr>
+            
+            <div class="input-container">
+                <button onclick="cargarUsuarios()">Reveal cards</button>	
+            </div>
+            <div class="input-container">
+                <button onclick="clearVotes()">Clear votes</button>	
+            </div>
+                        
+            <hr>
+
+            <div class="container" id="list-container">		
+            </div>
+            <ul id="usuarios"></ul>
+      </div>
+   </body>
+   <script src="scrum.js"></script>
+</html>
