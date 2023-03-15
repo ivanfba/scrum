@@ -31,21 +31,18 @@
         </div>
 
       <div id="scrum" style="display:none">
-         <h1>Scrum Vote</h1>
+         <h1>Scrum Voting</h1>
            <hr>
             <form id="user-form" action="save_user.php" method="POST" >
                 <input hidden type="text" id="estimation" name="estimation">
                 <input hidden type="text" id="visualize" name="visualize">
 
-                <h3>Select a vote</h3>
                 <section id="tarjetas"></section>
                 <div class="input-container">
                     <button type="submit" id="add-btn" >Send vote</button>
                 </div>       
 
-            </form>
-     
-
+            </form>    
             <hr>
             
             <div class="input-container">
@@ -69,18 +66,11 @@
 
       </div>
 
-    <footer>
+        <footer>
 		<p> Checkout the code from Github  <a href="https://github.com/ivanfba/scrum" target="_blank"> https://github.com/ivanfba/scrum </a> </p>
 	</footer>
 
    </body>
    <script src="scrum.js?id=Math.round(Math.random() * 1000000)"></script>
    
-   <!--remove watermark from the hosting -->
-    <script>
-            
-                $('body').find('img[src$="IMAGE URL"]').parent().closest('a').closest('div').remove();
-            
-    </script>
-
 </html>
