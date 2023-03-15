@@ -1,3 +1,4 @@
+    
 // Obtenemos el botón de envío y el input de nombre
 var submitBtn = document.getElementById("submitBtn");
 var nameInput = document.getElementById("name");
@@ -286,6 +287,7 @@ function initializeDivs(){
         $('#name').val(localStorage.getItem("nombre"));
         document.getElementById("myModal").style.display = "none";
         document.getElementById("scrum").style.display = "block";
+        $("#myBtn").text ( "Logged as " + localStorage.getItem("nombre") );
     } else {
         document.getElementById("myModal").style.display = "block";
         document.getElementById("scrum").style.display = "none";
@@ -364,6 +366,8 @@ window.onclick = function(event) {
 // Cuando el usuario haga clic en el botón de envío, mostramos el nombre introducido en la consola y cerramos el modal
 submitBtn.onclick = function() {
   guardarNombre();
-  console.log("name: " + nameInput.value);
+  $("#myBtn").text ( "Logged as " + nameInput.value );
+  console.log( nameInput.value);
   modal.style.display = "none";
 }
+
