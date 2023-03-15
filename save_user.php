@@ -19,22 +19,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   // Agregar el nuevo usuario al objeto
   $users['usuarios'][] = array('nombre' => $name, 'estimacion' => $estimation);
   
-  if ($visualize==true && $users['visualize']=="false"){
+  
+  if ($visualize=="true" && ($users['visualize']=="true" || $users['visualize']=="" || $users['visualize']=="false" || $users['visualize']=="new"  )){
     $users['visualize'] = "true";
   }
-if ($visualize=="true" && $users['visualize']==""){
-    $users['visualize'] = "true";
-  }  
-  if ($visualize=="" && $users['visualize']=="true"){
-    $users['visualize'] = "false";
-  }  
- if ($visualize==false && $users['visualize']=="true"){
-    $users['visualize'] = "false";
-  }  
-  if ($visualize=="borrar" && ($users['visualize']=="true" || $users['visualize']=="" ) ) {
-    $users['visualize'] = "";
+  if ($visualize=="clear" && ($users['visualize']=="true" || $users['visualize']=="" ) ) {
+    foreach ($users['usuarios'] as $key => $user) {
+        
+            $users['usuarios'][$key]['estimacion']='';
+        
+    }
+    $users['visualize'] = "clear";
   }  
 
+  if ($visualize=="new" && ($users['visualize']=="true" || $users['visualize']=="" || $users['visualize']=="false" || $users['visualize']=="clear"  )) {
+    foreach ($users['usuarios'] as $key => $user) {        
+            $users['usuarios'][$key]['estimacion']='';        
+    }
+    $users['visualize'] = "false";
+  }    
+  
+  
   // Escribir el objeto de vuelta al archivo JSON
   file_put_contents($file, json_encode($users));
 

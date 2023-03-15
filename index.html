@@ -14,46 +14,59 @@
    </head>
    <body>      
          
-        <div id="contador"></div>
-        <br>
-      
-        <div id="popup">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name"><br>
-                <div class="input-container">
-                    <button onclick="guardarNombre()">Save</button>
-                </div>
-        </div>      
+       <!-- this will show the time since the new vote has been created -->
+        
+
+        <button id="myBtn">Login as</button>    
+
+        <!-- El Modal -->
+        <div id="myModal" class="modal">
+        <!-- Contenido del modal -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Type your name:</h2>
+            <input type="text" id="name" name="name">
+            <button id="submitBtn">Save name</button>
+        </div>
+        </div>
 
       <div id="scrum" style="display:none">
-         <h1>Scrum vote</h1>
-         <p>for PBI</p>
-
+         <h1>Scrum Vote</h1>
+           <hr>
             <form id="user-form" action="save_user.php" method="POST" >
-                <input hidden type="text" id="estimation" name="estimation"><br><br>
-                <input  type="text" id="visualize" name="visualize"><br><br>
+                <input hidden type="text" id="estimation" name="estimation">
+                <input hidden type="text" id="visualize" name="visualize">
+
+                <h3>Select a vote</h3>
                 <section id="tarjetas"></section>
-                
                 <div class="input-container">
-                    <button type="submit" id="add-btn" >Send Vote</button>
-                </div>
-                
+                    <button type="submit" id="add-btn" >Send vote</button>
+                </div>       
+
             </form>
+     
 
             <hr>
             
             <div class="input-container">
-                <button onclick="cargarUsuarios()">Reveal cards</button>	
+                <button onclick="revealCards()">Reveal votes</button>	
             </div>
-            <div class="input-container">
-                <button onclick="clearVotes()">Clear votes</button>	
-            </div>
-                        
-            <hr>
+
 
             <div class="container" id="list-container">		
             </div>
             <ul id="usuarios"></ul>
+
+            <hr>
+            <div class="input-container" style="display:none">
+                <button onclick="clearVotes()">Clear votes</button>	
+            </div>
+            <div class="input-container">                
+                <button onclick="newVote()">New vote</button>	
+            </div>            
+                        
+            <hr>
+
       </div>
    </body>
    <script src="scrum.js"></script>

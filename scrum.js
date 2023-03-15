@@ -1,3 +1,9 @@
+// Obtenemos el botón de envío y el input de nombre
+var submitBtn = document.getElementById("submitBtn");
+var nameInput = document.getElementById("name");
+
+
+let actions;
 let usuarios;
 let usuario = [];
 
@@ -43,6 +49,24 @@ function cargarUsuarios() {
 
 }
 
+
+function cargarAction() {
+
+   const xhttp = new XMLHttpRequest();
+
+   xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+         actions = JSON.parse(this.responseText);
+
+         actualizarAction(actions);
+      }
+   };
+
+   xhttp.open("GET", "http://inverzorro.freecluster.eu/scrum/users.json", true);
+   xhttp.send();
+
+}
+
 function escribirArchivoJSON() {}
 
 $('#user-form').submit(function (event) {
@@ -80,7 +104,9 @@ function sendData(){
       data: datos,
       success: function (data) {
          //alert('Usuario guardado correctamente.');
+
          cargarUsuarios();
+         
       },
       error: function () {
          //alert('Error al guardar el usuario.');
@@ -92,7 +118,53 @@ function sendData(){
 }
 
 
-function actualizarListaUsuarios(usuarios) {
+
+function sendAction(){
+
+
+   // Obtenemos los valores de los campos de entrada
+   var visualize = $("#visualize").val();
+   
+   // Creamos un objeto de datos para enviar al servidor
+   var datos = {
+      visualize
+   };
+   
+   $.ajax({
+      method: 'POST',
+      url: 'http://inverzorro.freecluster.eu/scrum/save_user.php',
+      data: datos,
+      success: function (data) {
+         //alert('Usuario guardado correctamente.');
+
+         cargarAction();
+         
+      },
+      error: function () {
+         //alert('Error al guardar el usuario.');
+      }
+   }); 
+
+}
+
+
+
+function actualizarAction(datos) {
+
+   let visualize = "";
+
+    for (let clave in datos.visualize) {    
+
+      visualize = datos.visualize;
+      
+      $('#visualize').val(visualize);
+    }
+
+   
+}
+
+
+function actualizarListaUsuarios(datos) {
 
    let listaUsuarios = document.getElementById("usuarios");
    listaUsuarios.innerHTML = "";
@@ -102,15 +174,10 @@ function actualizarListaUsuarios(usuarios) {
    let visualize = "";
 
    const listContainer = document.getElementById("list-container");
-   listContainer.innerHTML = "";
-
-   let datos = usuarios;
-    $('#visualize').val(datos.visualize);       
-
-   for (let clave in datos.usuarios) {
-
-   visualize = datos.visualize;
+   listContainer.innerHTML = "";  
    
+
+   for (let clave in datos.usuarios) {   
 
       name = datos.usuarios[clave].nombre;
       value = datos.usuarios[clave].estimacion;
@@ -131,12 +198,17 @@ function actualizarListaUsuarios(usuarios) {
          nameElement.innerText = name;
 
          valueElement.classList.add("value");
+         
          if (value){
              if (datos.visualize=="true"){
                 valueElement.innerText = value;
-             }else{
+             }
+             if (datos.visualize=="false" || datos.visualize=="new" ){
                 valueElement.innerText = "Voted";
              }
+             if (datos.visualize=="clear"){
+                valueElement.innerText = "N/A";
+             }             
          }else{
             valueElement.innerText = "N/A";
          }
@@ -197,6 +269,7 @@ addBtn.addEventListener("click", () => {
    const valueInput = document.getElementById("estimation");
    const name = nameInput.value;
    const value = valueInput.value;
+   $('#visualize').val("false");
    if (name && value) {
       
       const listContainer = document.getElementById("list-container");
@@ -225,31 +298,6 @@ addBtn.addEventListener("click", () => {
 
 function timer(){
 
-    // Obtener el elemento contador
-    const contador = document.getElementById('contador');
-
-    // Definir la fecha y hora objetivo
-    const fechaObjetivo = new Date('2023-03-09T21:28:00');
-
-    // Actualizar el contador cada segundo
-    setInterval(() => {
-    // Obtener la fecha y hora actual
-    const fechaActual = new Date();
-
-    // Calcular la diferencia entre la fecha objetivo y la actual
-    const diferencia = fechaActual - fechaObjetivo;
-
-    // Convertir la diferencia a segundos
-    const segundos = Math.floor(diferencia / 1000);
-
-    // Calcular los minutos, horas y días restantes
-    const minutos = Math.floor(segundos / 60);
-    const horas = Math.floor(minutos / 60);
-    const dias = Math.floor(horas / 24);
-
-    // Actualizar el contenido del elemento contador
-    contador.innerHTML = `${minutos % 60} min, ${segundos % 60} sec`;
-    }, 1000);
 }
 
 function initializeDivs(){
@@ -257,10 +305,10 @@ function initializeDivs(){
     
     if (localStorage.getItem("nombre")) {
         $('#name').val(localStorage.getItem("nombre"));
-        document.getElementById("popup").style.display = "none";
+        document.getElementById("myModal").style.display = "none";
         document.getElementById("scrum").style.display = "block";
     } else {
-        document.getElementById("popup").style.display = "block";
+        document.getElementById("myModal").style.display = "block";
         document.getElementById("scrum").style.display = "none";
     }
 }
@@ -268,29 +316,75 @@ function initializeDivs(){
 function guardarNombre() {
    var nombre = document.getElementById("name").value;   
    localStorage.setItem("nombre", nombre);
-   document.getElementById("popup").style.display = "none";
+   document.getElementById("myModal").style.display = "none";
    document.getElementById("scrum").style.display = "block";
    sendData();
 }
 
 function clearVotes(){
+    $('#visualize').val("clear");
+    sendAction();
+}
 
-    
+
+function newVote(){
+    $('#visualize').val("new");
+    sendAction();
+}
+
+function revealCards(){
+    $('#visualize').val("true");
+    sendAction();
 }
 
 function initializeUserVote(){
     $('#estimation').val('');
-    sendData();
+    sendAction();
 }
 
 function refresh() {
-  sendData();
+  //sendData();  
+  cargarUsuarios();
+  cargarAction();
 }
 
-setInterval(refresh, 5000);
+setInterval(refresh, 2000);
 
 
 initializeUserVote();
 initializeDivs();
 createCards();
-timer();
+cargarAction();
+
+
+
+// Obtenemos el modal y el botón que abre el modal
+var modal = document.getElementById("myModal");
+var btn = document.getElementById("myBtn");
+
+// Obtenemos el botón de cierre del modal
+var span = document.getElementsByClassName("close")[0];
+
+// Cuando el usuario haga clic en el botón, abrimos el modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// Cuando el usuario haga clic en el botón de cierre o en cualquier parte fuera del modal, cerramos el modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+
+// Cuando el usuario haga clic en el botón de envío, mostramos el nombre introducido en la consola y cerramos el modal
+submitBtn.onclick = function() {
+  guardarNombre();
+  console.log("name: " + nameInput.value);
+  modal.style.display = "none";
+}
