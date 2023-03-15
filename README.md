@@ -1,2 +1,3 @@
-# scrum
-This is a HTML/JS page for Scrum voting in PHP/JSON
+# Scrum Voting
+This is a little project for Scrum Voting that uses HTML/JS and PHP to store the results in a JSON file.
+
