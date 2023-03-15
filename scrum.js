@@ -184,13 +184,13 @@ function actualizarListaUsuarios(datos) {
                 valueElement.innerText = value;
              }
              if (datos.visualize=="false" || datos.visualize=="new" ){
-                valueElement.innerText = "Voted";
+                valueElement.innerHTML = "<img src='vote.png' height='48px' width='48px' />";
              }
              if (datos.visualize=="clear"){
-                valueElement.innerText = "N/A";
+                valueElement.innerHTML = "<img src='thinking.png'  height='48px' width='48px' />";
              }             
          }else{
-            valueElement.innerText = "N/A";
+            valueElement.innerHTML = "<img src='thinking.png'  height='48px' width='48px' />";
          }
          
          listItem.classList.add("list-item");
