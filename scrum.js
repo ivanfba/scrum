@@ -19,20 +19,6 @@ function agregarUsuario() {
 }
 
 function cargarUsuarios() {
-   /*
-   let xhr = new XMLHttpRequest();
-   xhr.open("GET", "http://inverzorro.freecluster.eu/scrum/users.json");
-   xhr.onload = function() {
-       if (xhr.status === 200) {
-           let datos = JSON.parse(xhr.responseText);
-
-           usuarios = datos.usuarios;
-           actualizarListaUsuarios(usuarios);
-
-       }
-   };
-   xhr.send();
-   */
 
    const xhttp = new XMLHttpRequest();
 
@@ -44,7 +30,7 @@ function cargarUsuarios() {
       }
    };
 
-   xhttp.open("GET", "http://inverzorro.freecluster.eu/scrum/users.json", true);
+   xhttp.open("GET", "users.json", true);
    xhttp.send();
 
 }
@@ -62,7 +48,7 @@ function cargarAction() {
       }
    };
 
-   xhttp.open("GET", "http://inverzorro.freecluster.eu/scrum/users.json", true);
+   xhttp.open("GET", "users.json", true);
    xhttp.send();
 
 }
@@ -91,16 +77,9 @@ function sendData(){
       visualize
    };
    
-   /*
-       let datosJSON = JSON.stringify(datos);
-       let xhr = new XMLHttpRequest();
-       xhr.open("POST", "http://inverzorro.freecluster.eu/scrum/save_user.php");
-       xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-       xhr.send(datosJSON);
-     */
    $.ajax({
       method: 'POST',
-      url: 'http://inverzorro.freecluster.eu/scrum/save_user.php',
+      url: 'save_user.php',
       data: datos,
       success: function (data) {
          //alert('Usuario guardado correctamente.');
@@ -132,7 +111,7 @@ function sendAction(){
    
    $.ajax({
       method: 'POST',
-      url: 'http://inverzorro.freecluster.eu/scrum/save_user.php',
+      url: 'save_user.php',
       data: datos,
       success: function (data) {
          //alert('Usuario guardado correctamente.');
