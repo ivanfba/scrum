@@ -9,7 +9,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
-        <link rel="stylesheet" type="text/css" href="scrum.css">
+        <link rel="stylesheet" type="text/css" href="scrum.css?id=Math.round(Math.random() * 1000000)">
         
    </head>
    <body>      
@@ -74,5 +74,13 @@
 	</footer>
 
    </body>
-   <script src="scrum.js"></script>
+   <script src="scrum.js?id=Math.round(Math.random() * 1000000)"></script>
+   
+   <!--remove watermark from the hosting -->
+    <script>
+            
+                $('body').find('img[src$="IMAGE URL"]').parent().closest('a').closest('div').remove();
+            
+    </script>
+
 </html>
