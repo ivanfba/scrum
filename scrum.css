@@ -1,6 +1,15 @@
 body {
   font-family: Arial, sans-serif;
 }
+#myBtn {
+  float: right;
+  margin-top: 10px;
+  text-align: right;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 h1 {
      font-family: 'Montserrat', sans-serif;
 }
@@ -17,11 +26,24 @@ h1 {
  .tarjeta-seleccionada {
      background-color: #fff3c1;
 }
+
+#container-vote {
+  display: left;
+}
+
+#tarjetas {
+  flex: 1;
+}
+
+.input-container-vote {
+  margin-left: 10px;
+}
+
  .container {
      display: flex;
      flex-wrap: wrap;
-     justify-content: center;
-     align-items: center;
+     justify-content: left;
+     align-items: left;
      margin: 20px;
 }
  .avatar {
