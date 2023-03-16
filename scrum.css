@@ -1,7 +1,7 @@
 body {
   font-family: Arial, sans-serif;
 }
-#myBtn {
+.topBtn {
   float: right;
   margin-top: 10px;
   text-align: right;
@@ -47,7 +47,7 @@ h1 {
      margin: 20px;
 }
  .avatar {
-     background-color: #ccc;
+     background-color: white;
      border-radius: 50%;
      width: 50px;
      height: 50px;

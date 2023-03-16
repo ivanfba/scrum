@@ -42,6 +42,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   
   // Escribir el objeto de vuelta al archivo JSON
   file_put_contents($file, json_encode($users));
+  
+      
+    $filename = 'avatar/' . $name;
+    if (!file_exists($filename)) {
+      $origen = 'avatar/images.png';
+      copy($origen, $filename);
+    }
+  
 
   // Devolver una respuesta para la solicitud AJAX
   echo 'ok';

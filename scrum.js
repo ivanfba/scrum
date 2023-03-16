@@ -1,6 +1,7 @@
     
 // Obtenemos el botón de envío y el input de nombre
 var submitBtn = document.getElementById("submitBtn");
+var submitBtnAvatar = document.getElementById("submitBtnAvatar");
 var nameInput = document.getElementById("name");
 
 
@@ -172,8 +173,11 @@ function actualizarListaUsuarios(datos) {
 
       if (name) {
          avatar.classList.add("avatar");
-         avatar.innerHTML = name.charAt(0).toUpperCase();
-
+         
+            
+         // Especifica la URL de la imagen
+         var url = "avatar/" + name;
+         avatar.innerHTML = "<img src='" + url + "' height='64px' width='64px' />";
          nameElement.classList.add("name");
          nameElement.innerText = name;
 
@@ -250,29 +254,7 @@ addBtn.addEventListener("click", () => {
    const name = nameInput.value;
    const value = valueInput.value;
    $('#visualize').val("false");
-   if (name && value) {
-      
-      const listContainer = document.getElementById("list-container");
-      
-      const avatar = document.createElement("div");
-            avatar.classList.add("avatar");
-            avatar.innerHTML = name.charAt(0).toUpperCase();
-      const nameElement = document.createElement("div");
-            nameElement.classList.add("name");
-            nameElement.innerText = name;
-      
-      const valueElement = document.createElement("div");
-            valueElement.classList.add("value");
-            valueElement.innerText = "N/A";
-      const listItem = document.createElement("div");
-            listItem.classList.add("list-item");
-            listItem.appendChild(avatar);
-            listItem.appendChild(nameElement);
-            listItem.appendChild(valueElement);
-            listContainer.appendChild(listItem);
-            // nameInput.value = "";
-            // valueInput.value = "";
-   }
+   
 });
 
 
@@ -285,6 +267,7 @@ function initializeDivs(){
     
     if (localStorage.getItem("nombre")) {
         $('#name').val(localStorage.getItem("nombre"));
+        $('#nameAvatar').val(localStorage.getItem("nombre"));
         document.getElementById("myModal").style.display = "none";
         document.getElementById("scrum").style.display = "block";
         $("#myBtn").text ( "Joined as " + localStorage.getItem("nombre") );
@@ -296,6 +279,7 @@ function initializeDivs(){
 
 function guardarNombre() {
    var nombre = document.getElementById("name").value;   
+   $('#nameAvatar').val(nombre);
    localStorage.setItem("nombre", nombre);
    document.getElementById("myModal").style.display = "none";
    document.getElementById("scrum").style.display = "block";
@@ -311,6 +295,7 @@ function clearVotes(){
 function newVote(){
     $('#visualize').val("new");
     sendAction();
+    location.reload();
 }
 
 function revealCards(){
@@ -342,27 +327,16 @@ cargarAction();
 // Obtenemos el modal y el botón que abre el modal
 var modal = document.getElementById("myModal");
 var btn = document.getElementById("myBtn");
-
 // Obtenemos el botón de cierre del modal
 var span = document.getElementsByClassName("close")[0];
-
 // Cuando el usuario haga clic en el botón, abrimos el modal
 btn.onclick = function() {
   modal.style.display = "block";
 }
-
 // Cuando el usuario haga clic en el botón de cierre o en cualquier parte fuera del modal, cerramos el modal
 span.onclick = function() {
   modal.style.display = "none";
 }
-
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-
-
 // Cuando el usuario haga clic en el botón de envío, mostramos el nombre introducido en la consola y cerramos el modal
 submitBtn.onclick = function() {
   guardarNombre();
@@ -370,4 +344,61 @@ submitBtn.onclick = function() {
   console.log( nameInput.value);
   modal.style.display = "none";
 }
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
 
+
+document.getElementById("myBtnAvatar").addEventListener("click", function() {
+  document.getElementById("myModalAvatar").style.display = "block";
+});
+
+document.getElementById("btn-cerrar").addEventListener("click", function() {
+  document.getElementById("myModalAvatar").style.display = "none";
+});
+
+
+
+// Selecciona el formulario y el botón de envío
+var form = $("#formAvatar");
+var btnEnviar = $("#myBtnAvatar");
+
+// Configura la acción de enviar el formulario con Ajax
+form.on("submit", function(e) {
+  // Detiene el envío del formulario predeterminado
+  e.preventDefault();
+
+  // Deshabilita el botón de envío mientras se procesa la solicitud
+  btnEnviar.attr("disabled", true);
+
+  // Crea un nuevo objeto FormData y agrega la imagen seleccionada
+  var datos = new FormData(form[0]);
+  datos.append("imagen", $("#imagen")[0].files[0]);
+  datos.append("nameAvatar", $("#nameAvatar").val());
+
+  // Envía la imagen utilizando Ajax
+  $.ajax({
+    type: "POST",
+    url: "save_avatar.php",
+    data: datos,
+    processData: false,
+    contentType: false,
+    success: function(data) {
+      // Si la solicitud es exitosa, actualiza la página con los resultados
+      console.log(data);
+    },
+    error: function(xhr, textStatus, errorThrown) {
+      // Si hay un error, muestra un mensaje de error
+      alert('Error to send/save image :( ');
+      console.error("Error al enviar la imagen: " + textStatus);
+    },
+    complete: function() {
+      // Habilita el botón de envío cuando se completa la solicitud
+      document.getElementById("myModalAvatar").style.display = "none";
+      btnEnviar.attr("disabled", false);
+      location.reload();
+    }
+  });
+});

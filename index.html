@@ -17,8 +17,8 @@
        <!-- this will show the time since the new vote has been created -->
         
 
-        <button class="" id="myBtn">Join as...</button>    
-        
+        <button class="topBtn" id="myBtn">Join as...</button>    
+        <button class="topBtn" id="myBtnAvatar">Upload avatar</button>            
 
         <!-- El Modal -->
         <div id="myModal" class="modal">
@@ -32,6 +32,24 @@
             </div>
         </div>
         </div>
+            
+    <div id="myModalAvatar" class="modal">
+      <div class="modal-content">
+        <span class="close"><button id="btn-cerrar" class="cerrar-modal"> &times; </button></span>
+        <form id="formAvatar" enctype="multipart/form-data">
+          <label for="imagen">Select a PNG image:</label>
+          <input type="file" id="imagen" name="imagen" accept="image/*">
+        
+
+          <input type="text" hidden id="nameAvatar" name="nameAvatar">
+        
+          <button type="submit" id="myBtnAvatar">Enviar</button>
+        </form>
+
+      </div>
+    </div>     
+        
+    
 
       <div id="scrum" style="display:none">
          <h1>Planning Poker</h1>
