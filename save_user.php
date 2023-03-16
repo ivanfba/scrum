@@ -46,7 +46,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       
     $filename = 'avatar/' . $name;
     if (!file_exists($filename)) {
-      $origen = 'avatar/images.png';
+        
+    $numero_aleatorio = rand(1, 11);
+
+      $origen = 'avatar/images' . $numero_aleatorio . '.png';
       copy($origen, $filename);
     }
   
