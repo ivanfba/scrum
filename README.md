@@ -14,7 +14,7 @@ Things to improve:
 * Let the option to remove users.
 * Let the option to customize the story points.
 
-Last Improvements:
+Last Improvements 9/Apr/23:
 * Space increased between avatars.
 * Displays average after revealing cards.
 * Displays most voted card.
