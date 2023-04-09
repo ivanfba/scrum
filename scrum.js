@@ -186,7 +186,7 @@ function updateUserList(data) {
                valueElement.innerHTML = "<strong><font size=5px>" + value + "</font></strong>";
             }
             if (data.visualize == "false" || data.visualize == "new") {
-               valueElement.innerHTML = "<img src='vote.png' height='48px' width='48px' />";
+               valueElement.innerHTML = "<img src='voted.png' height='48px' width='48px' />";
             }
             if (data.visualize == "clear") {
                valueElement.innerHTML = "<img src='thinking.png'  height='48px' width='48px' />";
