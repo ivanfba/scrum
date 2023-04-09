@@ -15,9 +15,9 @@ Things to improve:
 * Let the option to customize the story points.
 
 Last Improvements:
--Space increased between avatars.
--Displays average after revealing cards.
--Displays most voted card.
--Added popup to kick user.
--Updated UI.
--Congrats on agreement.
+* Space increased between avatars.
+* Displays average after revealing cards.
+* Displays most voted card.
+* Added popup to kick user.
+* Updated UI.
+* Congrats on agreement.
