@@ -9,32 +9,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   // Leer el archivo JSON y convertirlo en un objeto PHP
   $users = json_decode(file_get_contents($file), true);
 
-  // Verificar si el usuario ya existe y eliminarlo si es necesario
-  foreach ($users['usuarios'] as $key => $user) {
-    if ($user['nombre'] == $name) {
-      unset($users['usuarios'][$key]);
+  // Verificar si el user ya existe y eliminarlo si es necesario
+  foreach ($users['users'] as $key => $user) {
+    if ($user['name'] == $name) {
+      unset($users['users'][$key]);
     }
   }
 
-  // Agregar el nuevo usuario al objeto
-  $users['usuarios'][] = array('nombre' => $name, 'estimacion' => $estimation);
+  // Agregar el nuevo user al objeto
+  $users['users'][] = array('name' => $name, 'estimacion' => $estimation);
   
   
   if ($visualize=="true" && ($users['visualize']=="true" || $users['visualize']=="" || $users['visualize']=="false" || $users['visualize']=="new"  )){
     $users['visualize'] = "true";
   }
   if ($visualize=="clear" && ($users['visualize']=="true" || $users['visualize']=="" ) ) {
-    foreach ($users['usuarios'] as $key => $user) {
+    foreach ($users['users'] as $key => $user) {
         
-            $users['usuarios'][$key]['estimacion']='';
+            $users['users'][$key]['estimacion']='';
         
     }
     $users['visualize'] = "clear";
   }  
 
   if ($visualize=="new" && ($users['visualize']=="true" || $users['visualize']=="" || $users['visualize']=="false" || $users['visualize']=="clear"  )) {
-    foreach ($users['usuarios'] as $key => $user) {        
-            $users['usuarios'][$key]['estimacion']='';        
+    foreach ($users['users'] as $key => $user) {        
+            $users['users'][$key]['estimacion']='';        
     }
     $users['visualize'] = "false";
   }    
