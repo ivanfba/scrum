@@ -11,9 +11,9 @@ Things to improve:
 * Let the option to set a story title.
 * Let the option to customize the story points.
 
-* ~~ Translate commented code and variables into english for better understanding. ~~
-* ~~ Display the average once is revealed. ~~
-* ~~ Let the option to remove users. ~~
+ ~~ Translate commented code and variables into english for better understanding. ~~
+ ~~ Display the average once is revealed. ~~
+ ~~ Let the option to remove users. ~~
 
 Last Improvements 9/Apr/23:
 * Updated UI.
