@@ -1,3 +1,9 @@
+// Gets the last update from Repository
+$.getJSON("https://api.github.com/repos/ivanfba/scrum", function(data) {
+  var fecha = new Date(data.pushed_at);
+  elemento.innerHTML = " - Repository updated at: " + fecha.toLocaleString();
+});
+
 // Obtenemos el botón de envío y el input de name
 var submitBtn = document.getElementById("submitBtn");
 var kickBtn = document.getElementById("kickBtn");
