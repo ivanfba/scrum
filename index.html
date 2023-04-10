@@ -17,9 +17,6 @@
 
 <body>
 
-  <!-- this will show the time since the new vote has been created -->
-
-
   <div id="confites" style="display:none"></div>
   <div id="congratsMsg" style="display:none">Congratulations</div> 
 
@@ -29,7 +26,7 @@
   <!-- El Modal -->
   <div id="myModal" class="modal">
     <!-- Contenido del modal -->
-    <div class="modal-content" style="widh:50%">
+    <div class="modal-content" style="width:50%">
       <span class="close">&times;</span>
       <h2>Your name:</h2>
       <div class="input-container">
@@ -41,25 +38,25 @@
   </div>
 
   <div id="myModalAvatar" class="modal">
-    <div class="modal-content" style="widh:50%">
+    <div class="modal-content" style="width:50%">
       <span id="close" class="close">&times;</span>
       <form id="formAvatar" enctype="multipart/form-data">
-        <label for="imagen">Select a PNG image:</label>
-        <input type="file" id="imagen" name="imagen" accept="image/*">
-        <input type="text" hidden id="nameAvatar" name="nameAvatar">
-        <button type="submit" id="myBtnAvatar">Upload</button>
+        <h2>Select a PNG image: </h2>
+        <div class="input-container">
+          <input type="file" id="imagen" name="imagen" accept="image/*">
+          <input type="text" hidden id="nameAvatar" name="nameAvatar">
+          <button type="submit" id="myBtnAvatar">Upload</button>
+       </div>
       </form>
     </div>
   </div>
 
-
-  <!-- El Modal -->
   <div id="myModalKick" class="modal">
     <!-- Contenido del modal -->
-    <div class="modal-content" style="widh:50%">
+    <div class="modal-content" style="width:50%">
       <span class="close">&times;</span>
       <div class="input-container">
-        <input type="text" id="kickName" name="kickName">
+        <input type="text" id="kickName" name="kickName" disabled>
         <button id="kickBtn">Kick user</button>
       </div>
     </div>
