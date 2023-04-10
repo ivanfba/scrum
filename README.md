@@ -23,4 +23,4 @@ Demo at https://jugal-wall.000webhostapp.com/
 * Added user renaming.
 * Displays most voted card.
 * Displays average after revealing cards.
-
+* Displays the last update date from Github.
